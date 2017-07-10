@@ -1,0 +1,17 @@
+example:
+  database:
+    encryption:
+      key: null
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;AUTO_SERVER=TRUE;FILE_LOCK=FILE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
