@@ -15,7 +15,7 @@ Java 8
 
 There is a `User` entity which have different fields: `id`, `firstName`, `lastName`, `email`, `birthDate` and `creationDate`.
 
-All this fields except `id` are encrypted in database using AES algorithm.
+All fields except `id` are encrypted in database using AES algorithm.
 
 ### Repository
 
