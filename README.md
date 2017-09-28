@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/damienbeaufils/spring-data-jpa-encryption-example.svg?branch=master)](https://travis-ci.org/damienbeaufils/spring-data-jpa-encryption-example)
 
 An example of how to encrypt and decrypt entity fields with JPA converters and Spring Data JPA.
+See [blog post](https://adventuresofasoftwarecraftsman.wordpress.com/2017/07/21/how-to-properly-encrypt-data-using-jpa-converters-and-spring-data-jpa/).
 
 ## Requirements
 
