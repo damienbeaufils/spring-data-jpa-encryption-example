@@ -10,6 +10,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
@@ -131,6 +132,19 @@ public class LocalDateCryptoConverterTest {
 
         // Then
         assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(noSuchPaddingException);
+    }
+
+    @Test
+    public void convertToDatabaseColumn_should_rethrow_exception_when_cipher_initialization_fails_with_InvalidAlgorithmParameterException() throws Exception {
+        // Given
+        InvalidAlgorithmParameterException invalidAlgorithmParameterException = new InvalidAlgorithmParameterException();
+        when(cipherInitializer.prepareAndInitCipher(anyInt(), anyString())).thenThrow(invalidAlgorithmParameterException);
+
+        // When
+        Throwable throwable = catchThrowable(() -> spiedLocalDateCryptoConverter.convertToDatabaseColumn(LOCAL_DATE_TO_CIPHER));
+
+        // Then
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(invalidAlgorithmParameterException);
     }
 
     @Test
@@ -258,6 +272,19 @@ public class LocalDateCryptoConverterTest {
 
         // Then
         assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(noSuchPaddingException);
+    }
+
+    @Test
+    public void convertToEntityAttribute_should_rethrow_exception_when_cipher_initialization_fails_with_InvalidAlgorithmParameterException() throws Exception {
+        // Given
+        InvalidAlgorithmParameterException invalidAlgorithmParameterException = new InvalidAlgorithmParameterException();
+        when(cipherInitializer.prepareAndInitCipher(anyInt(), anyString())).thenThrow(invalidAlgorithmParameterException);
+
+        // When
+        Throwable throwable = catchThrowable(() -> spiedLocalDateCryptoConverter.convertToEntityAttribute(LOCAL_DATE_TO_DECIPHER_AS_STRING));
+
+        // Then
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(invalidAlgorithmParameterException);
     }
 
     @Test

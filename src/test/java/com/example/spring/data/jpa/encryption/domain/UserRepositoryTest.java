@@ -14,7 +14,8 @@ import java.time.format.DateTimeParseException;
 
 import static com.example.spring.data.jpa.encryption.domain.EncryptionHelper.disableDatabaseEncryption;
 import static com.example.spring.data.jpa.encryption.domain.EncryptionHelper.enableDatabaseEncryption;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -61,7 +62,7 @@ public class UserRepositoryTest {
         // Then
         assertThat(userRetrievedWithoutEncryptionEnabled.getFirstName())
                 .isNotEqualTo(plainFirstName)
-                .isEqualTo("S4vRPBO8X2f2YF+YFEWWr6do+mdGKSgOMcFcvJwfXas=");
+                .isEqualTo("S4vRPBO8X2f2YF+YFEWWrzK5eHtRGSpYzrA7j9TI1gI=");
     }
 
     @Test
@@ -95,7 +96,7 @@ public class UserRepositoryTest {
         // Then
         assertThat(userRetrievedWithoutEncryptionEnabled.getEmail())
                 .isNotEqualTo(plainEmail)
-                .isEqualTo("13DhN2Ak/USTo1UrzjNgOgY/b+hJchIAkK7/kie6MKk=");
+                .isEqualTo("13DhN2Ak/USTo1UrzjNgOmowXgQ5+HdcEFtaojE5zfI=");
     }
 
     @Test
@@ -127,7 +128,7 @@ public class UserRepositoryTest {
 
         // Then
         assertThat(throwable).hasCauseInstanceOf(DateTimeParseException.class)
-                .hasStackTraceContaining("70mKrO09DnCkDbrzFf3IGcVXJxHOdA4HI0IO16OT51A=");
+                .hasStackTraceContaining("70mKrO09DnCkDbrzFf3IGXWMAMTgLwHGdLsPPqq7ZR4=");
     }
 
 }

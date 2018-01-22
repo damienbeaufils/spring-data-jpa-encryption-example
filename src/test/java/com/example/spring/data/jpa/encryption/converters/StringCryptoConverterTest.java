@@ -10,6 +10,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -143,6 +144,19 @@ public class StringCryptoConverterTest {
     }
 
     @Test
+    public void convertToDatabaseColumn_should_rethrow_exception_when_cipher_initialization_fails_with_InvalidAlgorithmParameterException() throws Exception {
+        // Given
+        InvalidAlgorithmParameterException invalidAlgorithmParameterException = new InvalidAlgorithmParameterException();
+        when(cipherInitializer.prepareAndInitCipher(anyInt(), anyString())).thenThrow(invalidAlgorithmParameterException);
+
+        // When
+        Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToDatabaseColumn(STRING_TO_CIPHER));
+
+        // Then
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(invalidAlgorithmParameterException);
+    }
+
+    @Test
     public void convertToDatabaseColumn_should_rethrow_exception_when_encryption_fails_with_BadPaddingException() throws Exception {
         // Given
         BadPaddingException badPaddingException = new BadPaddingException();
@@ -267,6 +281,19 @@ public class StringCryptoConverterTest {
 
         // Then
         assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(noSuchPaddingException);
+    }
+
+    @Test
+    public void convertToEntityAttribute_should_rethrow_exception_when_cipher_initialization_fails_with_InvalidAlgorithmParameterException() throws Exception {
+        // Given
+        InvalidAlgorithmParameterException invalidAlgorithmParameterException = new InvalidAlgorithmParameterException();
+        when(cipherInitializer.prepareAndInitCipher(anyInt(), anyString())).thenThrow(invalidAlgorithmParameterException);
+
+        // When
+        Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToEntityAttribute(STRING_TO_DECIPHER));
+
+        // Then
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasCause(invalidAlgorithmParameterException);
     }
 
     @Test
