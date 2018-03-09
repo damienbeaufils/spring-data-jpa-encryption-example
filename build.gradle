@@ -9,7 +9,6 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
-ext['mockito.version'] = '1.10.19'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
