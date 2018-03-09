@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -37,7 +37,7 @@ public class StringCryptoConverterTest {
         stringCryptoConverter = new StringCryptoConverter(cipherInitializer);
 
         spiedStringCryptoConverter = spy(stringCryptoConverter);
-        doAnswer(returnsSecondArg()).when(spiedStringCryptoConverter).callCipherDoFinal(any(Cipher.class), any(byte[].class));
+        doAnswer(returnsSecondArg()).when(spiedStringCryptoConverter).callCipherDoFinal(any(), any());
 
         KeyProperty.DATABASE_ENCRYPTION_KEY = "MySuperSecretKey";
     }
@@ -160,7 +160,7 @@ public class StringCryptoConverterTest {
     public void convertToDatabaseColumn_should_rethrow_exception_when_encryption_fails_with_BadPaddingException() throws Exception {
         // Given
         BadPaddingException badPaddingException = new BadPaddingException();
-        when(spiedStringCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(badPaddingException);
+        when(spiedStringCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(badPaddingException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToDatabaseColumn(STRING_TO_CIPHER));
@@ -173,7 +173,7 @@ public class StringCryptoConverterTest {
     public void convertToDatabaseColumn_should_rethrow_exception_when_encryption_fails_with_IllegalBlockSizeException() throws Exception {
         // Given
         IllegalBlockSizeException illegalBlockSizeException = new IllegalBlockSizeException();
-        when(spiedStringCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(illegalBlockSizeException);
+        when(spiedStringCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(illegalBlockSizeException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToDatabaseColumn(STRING_TO_CIPHER));
@@ -300,7 +300,7 @@ public class StringCryptoConverterTest {
     public void convertToEntityAttribute_should_rethrow_exception_when_decryption_fails_with_BadPaddingException() throws Exception {
         // Given
         BadPaddingException badPaddingException = new BadPaddingException();
-        when(spiedStringCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(badPaddingException);
+        when(spiedStringCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(badPaddingException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToEntityAttribute(STRING_TO_DECIPHER));
@@ -313,7 +313,7 @@ public class StringCryptoConverterTest {
     public void convertToEntityAttribute_should_rethrow_exception_when_decryption_fails_with_IllegalBlockSizeException() throws Exception {
         // Given
         IllegalBlockSizeException illegalBlockSizeException = new IllegalBlockSizeException();
-        when(spiedStringCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(illegalBlockSizeException);
+        when(spiedStringCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(illegalBlockSizeException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedStringCryptoConverter.convertToEntityAttribute(STRING_TO_DECIPHER));

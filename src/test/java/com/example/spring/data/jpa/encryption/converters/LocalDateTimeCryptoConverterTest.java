@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -40,7 +40,7 @@ public class LocalDateTimeCryptoConverterTest {
         localDateTimeCryptoConverter = new LocalDateTimeCryptoConverter(cipherInitializer);
 
         spiedLocalDateTimeCryptoConverter = spy(localDateTimeCryptoConverter);
-        doAnswer(returnsSecondArg()).when(spiedLocalDateTimeCryptoConverter).callCipherDoFinal(any(Cipher.class), any(byte[].class));
+        doAnswer(returnsSecondArg()).when(spiedLocalDateTimeCryptoConverter).callCipherDoFinal(any(), any());
 
         KeyProperty.DATABASE_ENCRYPTION_KEY = "MySuperSecretKey";
     }
@@ -151,7 +151,7 @@ public class LocalDateTimeCryptoConverterTest {
     public void convertToDatabaseColumn_should_rethrow_exception_when_encryption_fails_with_BadPaddingException() throws Exception {
         // Given
         BadPaddingException badPaddingException = new BadPaddingException();
-        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(badPaddingException);
+        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(badPaddingException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedLocalDateTimeCryptoConverter.convertToDatabaseColumn(LOCAL_DATE_TIME_TO_CIPHER));
@@ -164,7 +164,7 @@ public class LocalDateTimeCryptoConverterTest {
     public void convertToDatabaseColumn_should_rethrow_exception_when_encryption_fails_with_IllegalBlockSizeException() throws Exception {
         // Given
         IllegalBlockSizeException illegalBlockSizeException = new IllegalBlockSizeException();
-        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(illegalBlockSizeException);
+        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(illegalBlockSizeException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedLocalDateTimeCryptoConverter.convertToDatabaseColumn(LOCAL_DATE_TIME_TO_CIPHER));
@@ -291,7 +291,7 @@ public class LocalDateTimeCryptoConverterTest {
     public void convertToEntityAttribute_should_rethrow_exception_when_decryption_fails_with_BadPaddingException() throws Exception {
         // Given
         BadPaddingException badPaddingException = new BadPaddingException();
-        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(badPaddingException);
+        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(badPaddingException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedLocalDateTimeCryptoConverter.convertToEntityAttribute(LOCAL_DATE_TIME_TO_DECIPHER_AS_STRING));
@@ -304,7 +304,7 @@ public class LocalDateTimeCryptoConverterTest {
     public void convertToEntityAttribute_should_rethrow_exception_when_decryption_fails_with_IllegalBlockSizeException() throws Exception {
         // Given
         IllegalBlockSizeException illegalBlockSizeException = new IllegalBlockSizeException();
-        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(Cipher.class), any(byte[].class))).thenThrow(illegalBlockSizeException);
+        when(spiedLocalDateTimeCryptoConverter.callCipherDoFinal(any(), any())).thenThrow(illegalBlockSizeException);
 
         // When
         Throwable throwable = catchThrowable(() -> spiedLocalDateTimeCryptoConverter.convertToEntityAttribute(LOCAL_DATE_TIME_TO_DECIPHER_AS_STRING));
