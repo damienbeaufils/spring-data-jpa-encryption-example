@@ -30,7 +30,22 @@ dependencies {
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 	runtimeOnly('com.h2database:h2')
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		// Exclude JUnit 4
+		exclude group: 'junit'
+	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testImplementation("org.junit.platform:junit-platform-runner")
+	testImplementation("org.mockito:mockito-junit-jupiter")
+
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 task wrapper(type: Wrapper) {

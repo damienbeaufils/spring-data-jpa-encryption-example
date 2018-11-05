@@ -1,12 +1,12 @@
 package com.example.spring.data.jpa.encryption.domain;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,9 +17,9 @@ import static com.example.spring.data.jpa.encryption.domain.EncryptionHelper.ena
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class UserRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -29,14 +29,14 @@ public class UserRepositoryTest {
 
     private User user;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         enableDatabaseEncryption(testEntityManager);
         user = new User();
     }
 
     @Test
-    public void save_should_persist_user_with_auto_incremented_id() {
+    void save_should_persist_user_with_auto_incremented_id() {
         // Given
         User firstPersist = userRepository.save(user);
         User secondUser = new User();
@@ -47,9 +47,9 @@ public class UserRepositoryTest {
         // Then
         assertThat(secondPersist.getId()).isEqualTo(firstPersist.getId() + 1);
     }
-    
+
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_first_name_field() {
+    void save_should_verify_that_encryption_is_enabled_on_first_name_field() {
         // Given
         String plainFirstName = "plain first name";
         user.setFirstName(plainFirstName);
@@ -66,7 +66,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_last_name_field() {
+    void save_should_verify_that_encryption_is_enabled_on_last_name_field() {
         // Given
         String plainLastName = "plain last name";
         user.setLastName(plainLastName);
@@ -83,7 +83,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_email_field() {
+    void save_should_verify_that_encryption_is_enabled_on_email_field() {
         // Given
         String plainEmail = "email@example.org";
         user.setEmail(plainEmail);
@@ -100,7 +100,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_birth_date_field() {
+    void save_should_verify_that_encryption_is_enabled_on_birth_date_field() {
         // Given
         LocalDate birthDate = LocalDate.of(1988, 3, 28);
         user.setBirthDate(birthDate);
@@ -116,7 +116,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_creation_date_field() {
+    void save_should_verify_that_encryption_is_enabled_on_creation_date_field() {
         // Given
         LocalDateTime creationDate = LocalDateTime.of(2017, 7, 10, 9, 58, 17);
         user.setCreationDate(creationDate);
