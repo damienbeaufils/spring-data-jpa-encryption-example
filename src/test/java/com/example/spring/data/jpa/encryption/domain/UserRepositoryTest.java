@@ -36,7 +36,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_persist_user_with_auto_incremented_id() throws Exception {
+    public void save_should_persist_user_with_auto_incremented_id() {
         // Given
         User firstPersist = userRepository.save(user);
         User secondUser = new User();
@@ -49,7 +49,7 @@ public class UserRepositoryTest {
     }
     
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_first_name_field() throws Exception {
+    public void save_should_verify_that_encryption_is_enabled_on_first_name_field() {
         // Given
         String plainFirstName = "plain first name";
         user.setFirstName(plainFirstName);
@@ -66,7 +66,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_last_name_field() throws Exception {
+    public void save_should_verify_that_encryption_is_enabled_on_last_name_field() {
         // Given
         String plainLastName = "plain last name";
         user.setLastName(plainLastName);
@@ -83,7 +83,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_email_field() throws Exception {
+    public void save_should_verify_that_encryption_is_enabled_on_email_field() {
         // Given
         String plainEmail = "email@example.org";
         user.setEmail(plainEmail);
@@ -100,7 +100,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_birth_date_field() throws Exception {
+    public void save_should_verify_that_encryption_is_enabled_on_birth_date_field() {
         // Given
         LocalDate birthDate = LocalDate.of(1988, 3, 28);
         user.setBirthDate(birthDate);
@@ -116,7 +116,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void save_should_verify_that_encryption_is_enabled_on_creation_date_field() throws Exception {
+    public void save_should_verify_that_encryption_is_enabled_on_creation_date_field() {
         // Given
         LocalDateTime creationDate = LocalDateTime.of(2017, 7, 10, 9, 58, 17);
         user.setCreationDate(creationDate);

@@ -46,7 +46,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_null_string_when_local_date_to_encrypt_is_null() throws Exception {
+    public void convertToDatabaseColumn_should_return_null_string_when_local_date_to_encrypt_is_null() {
         // Given
         LocalDate attribute = null;
 
@@ -72,7 +72,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_formatted_local_date_but_not_encrypted_when_database_encryption_key_is_null() throws Exception {
+    public void convertToDatabaseColumn_should_return_formatted_local_date_but_not_encrypted_when_database_encryption_key_is_null() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = null;
 
@@ -84,7 +84,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_formatted_local_date_but_not_encrypted_when_database_encryption_key_is_empty() throws Exception {
+    public void convertToDatabaseColumn_should_return_formatted_local_date_but_not_encrypted_when_database_encryption_key_is_empty() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = "";
 
@@ -174,7 +174,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_null_local_date_when_string_to_decrypt_is_null() throws Exception {
+    public void convertToEntityAttribute_should_return_null_local_date_when_string_to_decrypt_is_null() {
         // Given
         String dbData = null;
 
@@ -186,7 +186,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_null_local_date_when_string_to_decrypt_is_empty() throws Exception {
+    public void convertToEntityAttribute_should_return_null_local_date_when_string_to_decrypt_is_empty() {
         // Given
         String dbData = "";
 
@@ -212,7 +212,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_unchanged_local_date_when_database_encryption_key_is_null() throws Exception {
+    public void convertToEntityAttribute_should_return_unchanged_local_date_when_database_encryption_key_is_null() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = null;
 
@@ -224,7 +224,7 @@ public class LocalDateCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_unchanged_local_date_when_database_encryption_key_is_empty() throws Exception {
+    public void convertToEntityAttribute_should_return_unchanged_local_date_when_database_encryption_key_is_empty() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = "";
 

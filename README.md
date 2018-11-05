@@ -7,7 +7,7 @@ See [blog post](https://adventuresofasoftwarecrafter.wordpress.com/2017/07/21/ho
 
 ## Requirements
 
-Java 8
+Java 11
 
 
 ## How is encryption enabled

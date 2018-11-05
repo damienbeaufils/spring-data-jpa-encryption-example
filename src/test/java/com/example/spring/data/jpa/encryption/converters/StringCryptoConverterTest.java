@@ -43,7 +43,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_null_string_when_string_to_encrypt_is_null() throws Exception {
+    public void convertToDatabaseColumn_should_return_null_string_when_string_to_encrypt_is_null() {
         // Given
         String attribute = null;
 
@@ -55,7 +55,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_empty_string_when_string_to_encrypt_is_empty() throws Exception {
+    public void convertToDatabaseColumn_should_return_empty_string_when_string_to_encrypt_is_empty() {
         // Given
         String attribute = "";
 
@@ -81,7 +81,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_unchanged_string_when_database_encryption_key_is_null() throws Exception {
+    public void convertToDatabaseColumn_should_return_unchanged_string_when_database_encryption_key_is_null() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = null;
 
@@ -93,7 +93,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToDatabaseColumn_should_return_unchanged_string_when_database_encryption_key_is_empty() throws Exception {
+    public void convertToDatabaseColumn_should_return_unchanged_string_when_database_encryption_key_is_empty() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = "";
 
@@ -183,7 +183,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_null_string_when_string_to_decrypt_is_null() throws Exception {
+    public void convertToEntityAttribute_should_return_null_string_when_string_to_decrypt_is_null() {
         // Given
         String dbData = null;
 
@@ -195,7 +195,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_empty_string_when_string_to_decrypt_is_empty() throws Exception {
+    public void convertToEntityAttribute_should_return_empty_string_when_string_to_decrypt_is_empty() {
         // Given
         String dbData = "";
 
@@ -221,7 +221,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_unchanged_string_when_database_encryption_key_is_null() throws Exception {
+    public void convertToEntityAttribute_should_return_unchanged_string_when_database_encryption_key_is_null() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = null;
 
@@ -233,7 +233,7 @@ public class StringCryptoConverterTest {
     }
 
     @Test
-    public void convertToEntityAttribute_should_return_unchanged_string_when_database_encryption_key_is_empty() throws Exception {
+    public void convertToEntityAttribute_should_return_unchanged_string_when_database_encryption_key_is_empty() {
         // Given
         KeyProperty.DATABASE_ENCRYPTION_KEY = "";
 
